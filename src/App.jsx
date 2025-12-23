@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./App.css";
 
 function App() {
@@ -7,28 +7,25 @@ function App() {
   const AIR_POLLUTION_API = import.meta.env.VITE_AIR_POLLUTION_API;
   const API_KEY = import.meta.env.VITE_API_KEY;
   const [cityName, setCityName] = useState("");
-  const [stateCode, setStateCode] = useState("");
-  const [countryCode, setCountryCode] = useState("");
-  const [GeoCodeData, setGeoCodeData] = useState([]);
-  const [AirPollutionData, setAirPollutionData] = useState([]);
+  const [geoCodeData, setGeoCodeData] = useState([]);
+  const [airPollutionData, setAirPollutionData] = useState([]);
 
   const searchData = () => {
     const city = cityName.trim();
-    const state = stateCode.trim();
-    const country = countryCode.trim();
-    if (!city || !state || !country) return;
+    if (!city) return;
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `${GEOCODING_API}?q=${city},${state},${country}&limit=1&appid=${API_KEY}`
+          `${GEOCODING_API}?q=${city}&limit=1&appid=${API_KEY}`
         );
         if (!response.ok)
           throw new Error(`HTTP error! status: ${response.status}`);
         const data = await response.json();
         setGeoCodeData(data);
-
+        console.log("geocodedata: ",data)
         //checking if data is present
         if (!data[0]) {
+          setAirPollutionData([]);
           console.log("Data doesnt exist");
           return;
         }
@@ -44,6 +41,7 @@ function App() {
             throw new Error(`HTTP error! status: ${airResponse.status}`);
           const data = await airResponse.json();
           setAirPollutionData(data);
+          console.log("airpollutiondata: ",data)
         }
       } catch (error) {
         console.log(`Unable to fetch data ${error.message}`);
@@ -51,9 +49,7 @@ function App() {
     };
     fetchData();
   };
-console.log(GeoCodeData)
-console.log("------------------------");
-console.log(AirPollutionData)
+
   return (
     <>
       <input
@@ -61,18 +57,6 @@ console.log(AirPollutionData)
         value={cityName}
         placeholder="City Name"
         onChange={(e) => setCityName(e.target.value)}
-      />
-      <input
-        type="text"
-        value={stateCode}
-        placeholder="State Code"
-        onChange={(e) => setStateCode(e.target.value)}
-      />
-      <input
-        type="text"
-        value={countryCode}
-        placeholder="Country Code"
-        onChange={(e) => setCountryCode(e.target.value)}
       />
       <button onClick={() => searchData()}>Search</button>
     </>
