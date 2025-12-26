@@ -1,105 +1,149 @@
 🌍 Air Pollution Project
 
-A web application that allows users to check real-time air pollution levels for any city.
 
-This project provides an interactive UI to get Air Quality Index (AQI) and pollutant data for a given city, helping users understand local air quality trends and make informed decisions.
+
+
+
+
+
+
+A React-based web application that allows users to check real-time air pollution data for any city using OpenWeatherMap APIs.
+
+The app converts a city name into geographical coordinates and then fetches accurate air quality data such as AQI and pollutant concentrations, helping users better understand environmental conditions.
 
 🚀 Features
 
-🔍 Search pollution by city
+🔍 Search air pollution data by city name
 
-📊 Displays important air quality indicators (e.g., PM2.5, PM10, AQI)
+🌐 Converts city → latitude & longitude using Geocoding API
 
-🌐 Built with React + Vite
+📊 Fetches real-time air quality data using Air Pollution API
 
-💨 Stylish and responsive UI
+🧪 Displays:
+
+Air Quality Index (AQI)
+
+PM2.5, PM10
+
+CO, NO₂, SO₂, O₃, NH₃
+
+⚡ Fast and responsive UI built with React + Vite
 
 🧱 Tech Stack
 
-React – Frontend UI
+React
 
-Vite – Fast development build tool
+Vite
 
-HTML / CSS / JavaScript
+JavaScript
 
-(Optional) Use any public Air Quality API (like IQAir or OpenAQ) for data
+HTML & CSS
 
-📦 Installation
+OpenWeatherMap APIs
 
-Clone the repository:
+🔌 APIs Used
+1️⃣ OpenWeatherMap Geocoding API
 
+Used to convert a city name into latitude and longitude.
+
+🔗 https://openweathermap.org/api/geocoding-api
+
+2️⃣ OpenWeatherMap Air Pollution API
+
+Used to fetch real-time air quality and pollutant data based on coordinates.
+
+🔗 https://openweathermap.org/api/air-pollution
+
+✅ A single OpenWeatherMap API key is used for both APIs.
+
+📸 UI Preview
+
+
+![Air Pollution App UI](assets/Ui.png)
+
+
+📦 Installation & Setup
+1️⃣ Clone the repository
 git clone https://github.com/milan-2604/Air-Pollution-Project.git
 cd Air-Pollution-Project
 
-
-Install dependencies:
-
+2️⃣ Install dependencies
 npm install
 
+3️⃣ Setup Environment Variables
 
-Start the dev server:
+Create a .env file in the root directory and add:
 
+VITE_AIR_POLLUTION_API=http://api.openweathermap.org/data/2.5/air_pollution
+
+VITE_GEOCODING_API=http://api.openweathermap.org/geo/1.0/direct 
+
+VITE_API_KEY=your_api_key_here
+
+
+4️⃣ Run the application
 npm run dev
 
 
-Open your browser and go to:
+Open your browser at:
 
 http://localhost:5173
 
-🛠 Usage
+🔄 How It Works
 
-Enter a city name in the search bar.
+User enters a city name
 
-Click “Search”.
+App calls the Geocoding API to get latitude & longitude
 
-See the current air pollution data for that city.
+Coordinates are passed to the Air Pollution API
 
-Customize or extend to display additional pollutants or visualizations.
+Air quality data is displayed on the UI
 
 📁 Project Structure
 Air-Pollution-Project/
-├── public/             # Static public files
-├── src/                # React source code
-├── .gitignore
+├── public/
+├── src/
+│   ├── components/
+│   ├── services/        # API calls
+│   ├── App.jsx
+│   └── main.jsx
+├── assets/
+│   └── Ui.png
+├── .env
 ├── index.html
 ├── package.json
 ├── vite.config.js
 └── README.md
 
-📡 API Integration
-
-This project expects a backend API that returns air quality data. You can integrate with:
-
-OpenAQ API – free and open source air quality data
-
-IQAir AirVisual API
-
-Any custom REST API
-
-Update the API endpoint and keys in src/ as needed.
-
 🤝 Contributing
 
-Pull requests are welcome!
-Please open an issue first to discuss what you’d like to change.
+Contributions are welcome! 🚀
 
-Steps to contribute:
+Fork the repository
 
-Fork this repository
+Create a new branch:
 
-Create your branch: git checkout -b feature/YourFeature
+git checkout -b feature/your-feature-name
 
-Commit your changes: git commit -m 'Add new feature'
 
-Push to branch: git push origin feature/YourFeature
+Commit your changes:
 
-Open a pull request
+git commit -m "Add new feature"
+
+
+Push to the branch:
+
+git push origin feature/your-feature-name
+
+
+Open a Pull Request
 
 📄 License
 
 This project is open-source and available under the MIT License.
 
-❤️ Acknowledgements
+🙌 Acknowledgements
 
-Inspired by open-source air quality projects and dashboards focused on air pollution awareness. 
-GitHub
+OpenWeatherMap for providing reliable weather and air quality APIs
+
+Inspired by environmental awareness and clean air initiatives 🌱
