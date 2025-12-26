@@ -62,10 +62,10 @@ function AqiGauge({ value, components, locationName }) {
   return (
     <Box
       width="100%"
-      maxWidth={600}
+      maxWidth={{ xs: 350, sm: 500, md: 600 }}
       mx="auto"
       mt={4}
-      p={3}
+      p={{ xs: 2, sm: 3 }}
       borderRadius={5}
       sx={{
         background: `linear-gradient(135deg, ${currentRange.color} 0%, ${adjustBrightness(
@@ -86,8 +86,8 @@ function AqiGauge({ value, components, locationName }) {
           top: "30%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          width: 300,
-          height: 300,
+          width: { xs: 240, sm: 280, md: 300 },
+          height: { xs: 240, sm: 280, md: 300 },
           borderRadius: "50%",
           bgcolor: "rgba(255,255,255,0.1)",
           zIndex: 0,
@@ -103,7 +103,7 @@ function AqiGauge({ value, components, locationName }) {
 
 
         <Typography
-          variant="h4"
+          variant={{ xs: "h5", sm: "h4" }}
           fontWeight="800"
           sx={{ 
             textTransform: "capitalize", 
@@ -131,7 +131,7 @@ function AqiGauge({ value, components, locationName }) {
       <Box
         position="relative"
         zIndex={1}
-        height={160} // Half of the 300px width + padding
+        height={{ xs: 120, sm: 140, md: 160 }} // Responsive height
         display="flex"
         justifyContent="center"
         overflow="hidden" // Hides the bottom half of the circle
@@ -140,10 +140,10 @@ function AqiGauge({ value, components, locationName }) {
         <Box
           sx={{
             position: "relative",
-            width: 300,
-            height: 300,
+            width: { xs: 240, sm: 280, md: 300 }, // Responsive width
+            height: { xs: 240, sm: 280, md: 300 }, // Responsive height
             borderRadius: "50%",
-            border: "20px solid rgba(255,255,255,0.2)",
+            border: "20px solid rgba(128, 23, 23, 0.2)",
             borderBottomColor: "transparent", // Makes it a semi-circle visually
             borderRightColor: "transparent", // Only helps if rotated, but we use overflow hidden on parent
             boxSizing: "border-box",
@@ -167,8 +167,12 @@ function AqiGauge({ value, components, locationName }) {
                   width: 2,
                   bgcolor: subTextColor,
                   transformOrigin: "top center",
-                  // 130px is roughly radius (150) minus border (20) minus padding
-                  transform: `rotate(${tickAngle}deg) translateY(-125px)`, 
+                  // Responsive translateY: for xs: 240/2 - 20 - 10 = 100, sm: 130, md: 125
+                  transform: {
+                    xs: `rotate(${tickAngle}deg) translateY(-100px)`,
+                    sm: `rotate(${tickAngle}deg) translateY(-120px)`,
+                    md: `rotate(${tickAngle}deg) translateY(-125px)`
+                  },
                 }}
               >
                  {/* Text Label for the Tick */}
@@ -196,10 +200,10 @@ function AqiGauge({ value, components, locationName }) {
         <Box
             sx={{
                 position: "absolute",
-                bottom: 10, // Align with the bottom of the semi-circle
+                bottom: { xs: 8, sm: 9, md: 10 }, // Responsive bottom position
                 left: "50%",
                 width: 6,
-                height: 140, // Needle Length
+                height: { xs: 112, sm: 126, md: 140 }, // Responsive needle length
                 bgcolor: textColor,
                 borderRadius: "4px",
                 transformOrigin: "bottom center",
@@ -245,7 +249,7 @@ function AqiGauge({ value, components, locationName }) {
       <Box textAlign="center" mt={-2} position="relative" zIndex={2}>
 
     
-        <Typography variant="h2" fontWeight="800" sx={{ lineHeight: 1 }}>
+        <Typography variant={{ xs: "h3", sm: "h2" }} fontWeight="800" sx={{ lineHeight: 1 }}>
             {Math.round(clampedValue)}
         </Typography>
         <Box 
@@ -279,14 +283,14 @@ function AqiGauge({ value, components, locationName }) {
               if (val === undefined) return null;
 
               return (
-                <Grid item xs={4} sm={2} key={key}>
+                <Grid item xs={6} sm={4} md={2} key={key}>
                   <Paper
                     elevation={0}
                     sx={{
                       bgcolor: "rgba(255,255,255,0.2)",
                       backdropFilter: "blur(10px)",
                       color: textColor,
-                      p: 1.5,
+                      p: { xs: 1, sm: 1.5 },
                       borderRadius: 3,
                       textAlign: "center",
                       border: `1px solid rgba(255,255,255,0.15)`,
