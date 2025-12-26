@@ -148,6 +148,82 @@ button:active {
   }
 }
 
+/* Tablet responsiveness */
+@media (max-width: 768px) {
+  #root {
+    max-width: 100%;
+    padding: 1.5rem 1rem;
+  }
+
+  .app-container {
+    gap: 1rem;
+  }
+
+  .search-box {
+    max-width: 100%;
+  }
+
+  input[type="text"] {
+    padding: 0.7rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  button {
+    padding: 0.7rem 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  .suggestion-container {
+    max-width: 100%;
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 480px) {
+  #root {
+    padding: 1rem 0.5rem;
+  }
+
+  .app-container {
+    gap: 1rem;
+  }
+
+  input[type="text"] {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  button {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.85rem;
+  }
+
+  .suggestion-container li {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* AQI Gauge responsiveness */
+@media (max-width: 600px) {
+ 
+  
+  /* Reduce gauge size on smaller screens */
+  .app-container > div:last-child > div {
+    max-width: 100% !important;
+    padding: 1.5rem !important;
+  }
+}
+
+/* Extra small screens - make gauge even more compact */
+@media (max-width: 400px) {
+  .app-container > div:last-child > div {
+    padding: 1rem !important;
+    transform: scale(0.8);
+    transform-origin: center top;
+  }
+}
+
 /* Light Mode Overrides */
 @media (prefers-color-scheme: light) {
   input[type="text"] {
